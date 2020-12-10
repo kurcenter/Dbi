@@ -7,11 +7,13 @@ class ResultSet
     private $stmt;
 
     /**
-     * Undocumented variable
-     *
      * @var \mysqli_result
      */
     private $query;
+
+    /**
+     * @var string
+     */
     private $fetchType = 'object';
 
     /**
@@ -126,7 +128,7 @@ class ResultSet
      *
      * @return yield
      */
-    public function yield() 
+    public function next() 
     {
         while ($row = $this->queryFetch($this->fetchType)) {
              yield $row;
