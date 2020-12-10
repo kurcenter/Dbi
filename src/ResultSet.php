@@ -100,9 +100,9 @@ class ResultSet
     /**
      * Полить результат выборки
      *
-     * @return void
+     * @return array
      */
-    private function row() {
+    public function row() {
         $data = $this->queryFetch('array');
 
         $this->stmt->close();
@@ -112,9 +112,9 @@ class ResultSet
     /**
      * Полить результат выборки
      *
-     * @return void
+     * @return array
      */
-    private function rows() {
+    public function rows() {
         $data = [];
         while ($row = $this->queryFetch('array')) {
             $data[] = $row;
