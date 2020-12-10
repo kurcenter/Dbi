@@ -12,7 +12,7 @@ class Paginator
     private $query;
     private $param;
     private $total;
- 
+
     /**
      * Конструктор класса
      *
@@ -36,9 +36,9 @@ class Paginator
      */
     public function getData($limit = 10, $page = 1)
     {
-        $this->limit = ($limit === null)? self::LIMIT : $limit;
-        $this->page = ($page === null)? 1 : $page;
-     
+        $this->limit = ($limit === null) ? self::LIMIT : $limit;
+        $this->page = ($page === null) ? 1 : $page;
+
         if ($this->limit == 'all') {
             $query = $this->query;
         } else {
@@ -56,7 +56,7 @@ class Paginator
         $result->limit = $this->limit;
         $result->total = $this->total;
         $result->data  = $results;
-     
+
         return $result;
     }
 
@@ -73,43 +73,43 @@ class Paginator
             return '';
         }
 
-        $last = ($this->limit != 0)? ceil($this->total / $this->limit) : 0;
+        $last = ($this->limit != 0) ? ceil($this->total / $this->limit) : 0;
 
         $start = (($this->page - $links) > 0) ? $this->page - $links : 1;
         $end = (($this->page + $links) < $last) ? $this->page + $links : $last;
-   
+
         $html = '<ul class="' . $list_class . '">';
-   
+
         $class = ($this->page == 1) ? "disabled" : "";
         $html .= '<li class="' . $class . '"><a href="' . $this->setGetParam(['limit' => $this->limit, 'page' => ($this->page - 1)]) . '">&laquo;</a></li>';
-   
+
         if ($start > 1) {
             $html .= '<li><a href="' . $this->setGetParam(['limit' => $this->limit, 'page' => 1]) . '">1</a></li>';
             $html .= '<li class="disabled"><span>...</span></li>';
         }
-   
-        for ($i = $start ; $i <= $end; $i++) {
+
+        for ($i = $start; $i <= $end; $i++) {
             $class = ($this->page == $i) ? "active" : "";
             $html .= '<li class="' . $class . '"><a href="' . $this->setGetParam(['limit' => $this->limit, 'page' => $i]) . '">' . $i . '</a></li>';
         }
-   
+
         if ($end < $last) {
             $html .= '<li class="disabled"><span>...</span></li>';
             $html .= '<li><a href="' . $this->setGetParam(['limit' => $this->limit, 'page' => $last]) . '">' . $last . '</a></li>';
         }
-   
+
         $class = ($this->page == $last) ? "disabled" : "";
         $html .= '<li class="' . $class . '"><a href="' . $this->setGetParam(['limit' => $this->limit, 'page' => ($this->page + 1)]) . '">&raquo;</a></li>';
-   
+
         $html .= '</ul>';
-   
+
         return $html;
     }
 
-    public function createLimits($current, $ranges = null, $hiddenFields = []) 
+    public function createLimits($current, $ranges = null)
     {
         if ($ranges === null) {
-            $ranges = [50,100,300,500,1000];
+            $ranges = [50, 100, 300, 500, 1000];
         }
 
         $getParam = [];
@@ -121,52 +121,53 @@ class Paginator
 
         $html = '
             <div class="pagination">
-                <form action="'. $_SERVER['REQUEST_URI'] .'" method="get" id="paginateLimit" class="form-inline">
+                <form action="' . $_SERVER['REQUEST_URI'] . '" method="get" id="paginateLimit" class="form-inline">
                     <span>Показать на странице</span>
                     <select name="limit" class="form-control" onchange="document.getElementById(\'paginateLimit\').submit();">';
 
         foreach ($ranges as $range) {
-            $selected = ($current == $range)? 'selected' : '';
+            $selected = ($current == $range) ? 'selected' : '';
             $html .= "<option value=\"{$range}\" {$selected}>{$range}</option>";
         }
 
-        $html .='
+        $html .= '
                     </select>';
         foreach ($getParam as $name => $value) {
             $html .= "<input type=\"hidden\" name=\"{$name}\" value=\"{$value}\">";
         }
 
-        $html .='
+        $html .= '
                 </form>
             </div>';
-        
+
         return $html;
     }
 
-   /** Замена GET параметров в ссылке
-    *
-    * @param array $param 
-    * @param string $url [option] 
-    * @return void
-    */
-   private static function setGetParam(array $param, $url = null) 
-   {
-       if ($url === null) {
-         $url = $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
-       }
+    /**
+     * Замена GET параметров в ссылке
+     *
+     * @param array $param 
+     * @param string $url [option] 
+     * @return void
+     */
+    private static function setGetParam(array $param, $url = null)
+    {
+        if ($url === null) {
+            $url = $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
+        }
 
-       $parse_url = parse_url($url);
-       $get_params = [];
+        $parse_url = parse_url($url);
+        $get_params = [];
 
-       if (isset($parse_url['query'])) {
-           parse_str($parse_url['query'], $get_params);
-       }
-       foreach ($param as $key => $value) {
-           $get_params[$key ] = $value;
-       }
+        if (isset($parse_url['query'])) {
+            parse_str($parse_url['query'], $get_params);
+        }
+        foreach ($param as $key => $value) {
+            $get_params[$key] = $value;
+        }
 
-       $link = http_build_query($get_params);
+        $link = http_build_query($get_params);
 
-       return $_SERVER['REQUEST_SCHEME'] . '://' . $parse_url['path'] . '?' . $link;
-   }	
+        return $_SERVER['REQUEST_SCHEME'] . '://' . $parse_url['path'] . '?' . $link;
+    }
 }
