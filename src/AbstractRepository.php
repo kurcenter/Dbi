@@ -138,13 +138,20 @@ abstract class AbstractRepository
     }
 
     /**
-     * Get all rows in the table
+     * Returns all rows in the table
      *
+     * @param string $fields
+     * @param array $option [optional] [orderBy]
      * @return array
      */
-    public function getAll()
+    public function getAll($fields = '*', array $option = [])
     {
-        return $this->db->exec("SELECT * FROM {$this->tableName}")->rows;
+        $orderBy = '';
+        if (isset($option['orderBy'])) {
+            $orderBy = ' ORDER BY ' . $option['orderBy'];
+        }
+
+        return $this->db->exec("SELECT {$fields} FROM {$this->tableName} {$orderBy}")->rows;
     }
 
     /**
@@ -188,7 +195,7 @@ abstract class AbstractRepository
      *
      * @return array
      */
-    public function getFromSheme()
+    public function getFromScheme()
     {
         $sheme = $this->db->exec("SHOW COLUMNS FROM `{$this->tableName}`")->rows;
 
