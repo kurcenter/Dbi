@@ -1,6 +1,6 @@
 <?php
 
-namespace Kansept\Dbi;
+namespace Kurcenter\Dbi;
 
 class Db
 {
@@ -62,7 +62,7 @@ class Db
      *
      * @param string $sql
      * @param array $param
-     * @throws \Kansept\Dbi\DbException
+     * @throws \Kurcenter\Dbi\DbException
      * @return ResultSet|bool
      */
     public function exec($sql, array $param = [])

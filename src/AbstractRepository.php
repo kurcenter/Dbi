@@ -1,11 +1,11 @@
 <?php
 
-namespace Kansept\Dbi;
+namespace Kurcenter\Dbi;
 
 abstract class AbstractRepository
 {
     /**
-     * @var \Kansept\Dbi\Db
+     * @var \Kurcenter\Dbi\Db
      */
     protected $db;
 
@@ -26,7 +26,7 @@ abstract class AbstractRepository
     /**
      * Class constructor.
      */
-    public function __construct(\Kansept\Dbi\Db $db)
+    public function __construct(\Kurcenter\Dbi\Db $db)
     {
         $this->db = $db;
     }

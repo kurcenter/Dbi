@@ -7,7 +7,7 @@ use PHPUnit\Framework\TestCase;
 final class DbiTest extends TestCase
 {
     /**
-     * @var \Kansept\Dbi\Db
+     * @var \Kurcenter\Dbi\Db
      */
     private $db;
 
@@ -16,7 +16,7 @@ final class DbiTest extends TestCase
         $mysqli = new mysqli('db.mynetwork', 'root', 'root', 'test');
         $mysqli->set_charset('UTF-8');
 
-        $this->db = new \Kansept\Dbi\Db($mysqli);
+        $this->db = new \Kurcenter\Dbi\Db($mysqli);
 
         $this->db->exec("
             DROP TABLE IF EXISTS `demo` CASCADE;

@@ -1,6 +1,6 @@
 <?php
 
-namespace Kansept\Dbi;
+namespace Kurcenter\Dbi;
 
 class DbException extends \Exception
 {
