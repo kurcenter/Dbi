@@ -1,11 +1,11 @@
-# kansept/dbi - MySQLi Wrapper 
+# kurcenter/dbi - MySQLi Wrapper 
 
 ## Install
 
 ### Composer
 
 ```
-composer require kansept/dbi
+composer require kurcenter/dbi
 ```
 
 Then include or require the file in your php page.
@@ -20,7 +20,7 @@ require 'vendor/autoload.php';
 $mysqli = new mysqli('localhost', 'user', 'password', 'db');
 $mysqli->set_charset('UTF-8');
 
-$db = new \Kansept\Dbi\Db($mysqli);
+$db = new \Kurcenter\Dbi\Db($mysqli);
 ```
 
 ## Query
