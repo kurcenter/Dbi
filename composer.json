@@ -15,7 +15,7 @@
     },
     "autoload": {
         "psr-4": {
-            "Kurcenter\\Dbi\\": "src/" 
+            "Kansept\\Dbi\\": "src/" 
         }
     },
     "require-dev": {
