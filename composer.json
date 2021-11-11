@@ -1,5 +1,5 @@
 {
-    "name": "kansept/dbi",
+    "name": "kurcenter/dbi",
     "description": "Wrapper class for MySQLi prepared statements",
 	"keywords": ["MySQLi", "MySQL", "prepared", "database"],
     "type": "library",
@@ -15,7 +15,7 @@
     },
     "autoload": {
         "psr-4": {
-            "Kansept\\Dbi\\": "src/" 
+            "Kurcenter\\Dbi\\": "src/" 
         }
     },
     "require-dev": {
